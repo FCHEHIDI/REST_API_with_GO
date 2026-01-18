@@ -1,0 +1,7 @@
+### Delete Event (Protected - Requires Token)
+### Replace YOUR_TOKEN_HERE with the token from login response
+### Replace :id with actual event ID
+### Only the event creator can delete
+
+DELETE http://localhost:8080/events/1
+Authorization: YOUR_TOKEN_HERE

@@ -1,0 +1,6 @@
+### Unregister from Event (Protected - Requires Token)
+### Replace YOUR_TOKEN_HERE with the token from login response
+### Replace :id with actual event ID
+
+DELETE http://localhost:8080/events/1/unregister
+Authorization: YOUR_TOKEN_HERE

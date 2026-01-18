@@ -1,0 +1,9 @@
+POST http://localhost:8080/:id/register
+authorization: Bearer <token>
+Content-Type: application/json
+
+{
+    "name": "John Doe",
+    "email": "
+    "password": "securepassword"
+}

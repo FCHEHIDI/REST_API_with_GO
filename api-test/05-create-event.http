@@ -1,0 +1,13 @@
+### Create Event (Protected - Requires Token)
+### Replace YOUR_TOKEN_HERE with the token from login response
+
+POST http://localhost:8080/events
+Content-Type: application/json
+Authorization: YOUR_TOKEN_HERE
+
+{
+    "name": "Tech Conference 2026",
+    "description": "Annual technology conference",
+    "location": "San Francisco, CA",
+    "dateTime": "2026-06-15T10:00:00Z"
+}
