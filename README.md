@@ -1,219 +1,88 @@
 # REST API with Go and Gin Framework
 
-> **Learning Project**: Building a scalable REST API with Go to master backend engineering and prepare for production-grade systems.
+![REST API Architecture](./assets/Copilot_20260118_232258.png)
 
-## 🚀 Project Overview
+> **Building scalable backend systems** — Learning Go, REST APIs, and production-grade architecture patterns.
 
-A hands-on REST API built with Go, demonstrating core backend concepts with plans to evolve into a production-ready, scalable system. This project serves as a foundation for learning modern API development while maintaining clean, extensible architecture.
+---
 
-**Current Features:**
-- ✅ RESTful API with CRUD operations
-- ✅ JWT authentication & authorization
-- ✅ SQLite database integration
-- ✅ Secure password hashing
-- ✅ Protected routes with middleware
-- ✅ Clean code architecture
+## 🚀 Overview
 
-**Future Vision:**
-- 🔄 Migration to PostgreSQL for production
-- 🔄 Microservices architecture
-- 🔄 Redis caching layer
-- 🔄 Docker containerization
-- 🔄 Kubernetes orchestration
-- 🔄 Comprehensive testing suite
-- 🔄 CI/CD pipeline
-- 🔄 API rate limiting & monitoring
-- 🔄 Advanced features (search, pagination, filtering)
+Full-featured REST API demonstrating modern backend engineering with **Go and Gin framework**. Built with clean architecture and designed to evolve into a production-ready, scalable system.
 
-## 🎯 Learning Objectives
+### Current Stack
+✅ **REST API** with CRUD operations  
+✅ **JWT Authentication** & authorization  
+✅ **SQLite Database** with prepared statements  
+✅ **Password Hashing** (bcrypt)  
+✅ **Middleware** for protected routes  
+✅ **Clean Architecture** - models, routes, middleware separation
 
-Mastering backend engineering fundamentals while building a system designed for real-world scaling and enhancement.
+### Scaling Roadmap 🔄
+PostgreSQL • Redis • Docker • Kubernetes • Microservices • CI/CD • Monitoring • Rate Limiting • Testing Suite
 
-## 🏗️ Project Structure
+---
+
+## 🏗️ Architecture
 
 ```
-RESTAPI_GO/
-├── db/                    # Database initialization and schema
-│   └── db.go
-├── middlewares/           # Custom middleware (authentication)
-│   └── auth.go
-├── models/                # Data models and database operations
-│   ├── event.go
-│   └── user.go
-├── routes/                # HTTP handlers and route definitions
-│   ├── events.go
-│   ├── users.go
-│   ├── register.go
-│   └── routes.go
-├── utils/                 # Utility functions (JWT, hashing)
-│   ├── hash.go
-│   └── jwt.go
+├── db/          # Database layer
+├── middlewares/ # Authentication & middleware
+├── models/      # Data models & DB operations
+├── routes/      # HTTP handlers & endpoints
+├── utils/       # JWT & hashing utilities
+└── api-test/    # API test requests
+```
+
+---
 ├── api-test/              # HTTP test files for REST Client
 ├── main.go                # Application entry point
 ├── go.mod                 # Go module definition
 └── api.db                 # SQLite database (generated)
 ```
 
-## 🚀 Features
+## � API Endpoints
 
-### Event Management
-- ✅ Create, read, update, and delete events
-- ✅ Event registration and unregistration
-- ✅ Authorization checks (only event creators can modify)
-
-### User Management
-- ✅ User signup with password hashing
-- ✅ User login with JWT token generation
-- ✅ Protected routes requiring authentication
-
-### Security
-- ✅ Password hashing with bcrypt
-- ✅ JWT-based authentication
-- ✅ Authorization middleware
-- ✅ SQL injection prevention with prepared statements
-
-## 📋 Prerequisites
-
-- Go 1.24 or higher
-- Git
-- A code editor (VS Code recommended)
-- REST Client (VS Code extension) or Postman
-
-## ⚙️ Installation
-
-1. **Clone the repository**
-   ```bash
-   git clone <your-repository-url>
-   cd RESTAPI_GO
-   ```
-
-2. **Install dependencies**
-   ```bash
-   go mod download
-   ```
-
-3. **Run the application**
-   ```bash
-   go run .
-   ```
-
-The server will start on `http://localhost:8080`
-
-## 🔌 API Endpoints
-
-### Public Endpoints
-
+### Public
 | Method | Endpoint | Description |
 |--------|----------|-------------|
 | GET | `/` | Welcome message |
-| GET | `/events` | Get all events |
-| GET | `/events/:id` | Get event by ID |
-| POST | `/signup` | Register new user |
-| POST | `/login` | Login and get JWT token |
+| GET | `/events` | List all events |
+| GET | `/events/:id` | Get event details |
+| POST | `/signup` | Create account |
+| POST | `/login` | Login (returns JWT) |
 
-### Protected Endpoints (Require Authentication)
-
+### Protected (Requires JWT)
 | Method | Endpoint | Description |
 |--------|----------|-------------|
-| POST | `/events` | Create new event |
-| PUT | `/events/:id` | Update event (creator only) |
-| DELETE | `/events/:id` | Delete event (creator only) |
-| POST | `/events/:id/register` | Register for an event |
-| DELETE | `/events/:id/unregister` | Unregister from an event |
+| POST | `/events` | Create event |
+| PUT | `/events/:id` | Update event |
+| DELETE | `/events/:id` | Delete event |
+| POST | `/events/:id/register` | Register for event |
+| DELETE | `/events/:id/unregister` | Unregister from event |
 
-## 🧪 Testing the API
+---
 
-### Using REST Client (VS Code Extension)
+## ⚡ Quick Start
 
-Test files are available in the `api-test/` directory:
-
-1. Install the REST Client extension in VS Code
-2. Open any `.http` file in `api-test/`
-3. Click "Send Request" above each request
-
-### Using cURL
-
-**Sign up a new user:**
 ```bash
-curl -X POST http://localhost:8080/signup \
-  -H "Content-Type: application/json" \
-  -d '{"email":"user@example.com","password":"password123"}'
+# Clone and setup
+git clone https://github.com/FCHEHIDI/REST_API_with_GO.git
+cd REST_API_with_GO
+go mod download
+
+# Run
+go run .
+# Server at http://localhost:8080
 ```
 
-**Login:**
-```bash
-curl -X POST http://localhost:8080/login \
-  -H "Content-Type: application/json" \
-  -d '{"email":"user@example.com","password":"password123"}'
-```
+### Test Flow
+1. **Signup**: `POST /signup` → email & password
+2. **Login**: `POST /login` → get JWT token
+3. **Create Event**: `POST /events` + `Authorization: <token>`
+4. Use test files in `api-test/` folder
 
-**Create an event (requires token):**
-```bash
-curl -X POST http://localhost:8080/events \
-  -H "Content-Type: application/json" \
-  -H "Authorization: YOUR_JWT_TOKEN" \
-  -d '{
-    "name":"Tech Conference",
-    "description":"Annual tech event",
-    "location":"San Francisco",
-    "dateTime":"2026-06-15T10:00:00Z"
-  }'
-```
-
-**Get all events:**
-```bash
-curl http://localhost:8080/events
-```
-
-## 🔑 Authentication Flow
-
-1. **Sign up**: Create a new user account with email and password
-2. **Login**: Receive a JWT token (valid for 72 hours)
-3. **Use Token**: Include token in `Authorization` header for protected routes
-4. **Token Format**: `Authorization: YOUR_JWT_TOKEN_HERE`
-
-## 💾 Database Schema
-
-### Users Table
-```sql
-CREATE TABLE users (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    email TEXT NOT NULL UNIQUE,
-    password TEXT NOT NULL
-);
-```
-
-### Events Table
-```sql
-CREATE TABLE events (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    name TEXT NOT NULL,
-    description TEXT NOT NULL,
-    location TEXT NOT NULL,
-    dateTime DATETIME NOT NULL,
-    userID INTEGER,
-    FOREIGN KEY(userID) REFERENCES users(id)
-);
-```
-
-### Registrations Table
-```sql
-CREATE TABLE registrations (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    userID INTEGER,
-    eventID INTEGER,
-    FOREIGN KEY(userID) REFERENCES users(id),
-    FOREIGN KEY(eventID) REFERENCES events(id)
-);
-```
-
-## 🛠️ Technologies Used
-
-- **[Go](https://golang.org/)** - Programming language
-- **[Gin](https://github.com/gin-gonic/gin)** - Web framework
-- **[modernc.org/sqlite](https://gitlab.com/cznic/sqlite)** - Pure Go SQLite driver
-- **[golang-jwt/jwt](https://github.com/golang-jwt/jwt)** - JWT implementation
-- **[golang.org/x/crypto](https://pkg.go.dev/golang.org/x/crypto)** - Cryptography (bcrypt)
+---
 
 ## 📖 What I Learned
 
@@ -296,18 +165,25 @@ This project is actively evolving. Here's what's coming next:
 
 This isn't just a learning project—it's a **foundation for building real-world, scalable systems**. Each enhancement teaches critical production engineering skills that translate directly to professional backend development.
 
-## 🤝 Contributing
+---
 
-This is a personal learning project, but suggestions and feedback are welcome! Feel free to:
-- Open issues for bugs or improvements
-- Suggest better practices or patterns
-- Share learning resources
+## 🛠️ Tech Stack
 
-## 📝 License
+**Go** • **Gin Framework** • **SQLite** (→ PostgreSQL) • **JWT** • **bcrypt**
 
-This project is created for educational purposes. Feel free to use it for your own learning.
+---
 
-## 🙏 Acknowledgments
+## 📚 What I'm Learning
+
+Backend fundamentals • REST API design • Authentication patterns • Database operations • Clean architecture • Security best practices • Scalability planning
+
+---
+
+**Status**: ✅ Phase 1 Complete | 🔄 Ready to Scale | 🚀 Production-Bound
+
+---
+
+*Building this project to master backend engineering. Each phase adds production-grade features and real-world patterns.*
 
 - Go documentation and community
 - Gin framework documentation
